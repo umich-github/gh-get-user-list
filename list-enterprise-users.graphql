@@ -1,0 +1,26 @@
+query ListUsers($slug:String!, $cursor:String) {
+  enterprise(slug: $slug) {
+    ownerInfo {
+      samlIdentityProvider {
+        externalIdentities(first: 100, after: $cursor) {
+          pageInfo {
+            endCursor
+            hasNextPage
+            hasPreviousPage
+            startCursor
+          }
+          edges {
+            node {
+              samlIdentity {
+                nameId
+              }
+              user {
+                login
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
